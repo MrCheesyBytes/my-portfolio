@@ -138,4 +138,4 @@ Built with passion for cybersecurity and clean code. Hosted on Cloudflare Pages.
 
 > ### [Cloudflare Pages](https://pages.cloudflare.com/)
 > [![Deployment Status](https://img.shields.io/badge/Cloudflare_Pages-Active-orange?style=flat-square&logo=cloudflare)](https://pages.cloudflare.com/)
-> Cloudflare Pages is a JAMstack platform for frontend developers to collaborate and deploy websites.
+

@@ -134,3 +134,10 @@ MIT License - feel free to use this for your own portfolio!
 ## 🙏 Credits
 
 Built with passion for cybersecurity and clean code. Hosted on Cloudflare Pages.
+
+[![Cloudflare Pages](https://img.shields.io/badge/Cloudflare_Pages-2F7FD3?style=for-the-badge&logo=cloudflare&logoColor=white)](https://pages.cloudflare.com/ )
+
+<a href="https://pages.cloudflare.com/">
+<img src="https://opencraph.com/?url=https://pages.cloudflare.com/" width="600" alt="Cloudflare Pages Preview">
+</a>
+

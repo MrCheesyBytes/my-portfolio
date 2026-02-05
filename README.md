@@ -139,3 +139,7 @@ Built with passion for cybersecurity and clean code. Hosted on Cloudflare Pages.
 > ### [Cloudflare Pages](https://pages.cloudflare.com/)
 > [![Deployment Status](https://img.shields.io/badge/Cloudflare_Pages-Active-orange?style=flat-square&logo=cloudflare)](https://pages.cloudflare.com/)
 
+- **Google Anti-Gravity** ![Physics Engine](https://img.shields.io/badge/Physics-Box2D-blue?style=flat-square)  
+  An interactive experiment showcasing 2D physics and browser-based gravity.  
+  [Launch Experiment →](https://mrdoob.com/projects/chromeexperiments/google-gravity/)
+

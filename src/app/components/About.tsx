@@ -40,7 +40,7 @@ export default function About() {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 font-mono">
             <span className="text-terminal-accent">&gt;</span> About Me
           </h2>
-          <p className="text-gray-400 font-mono text-sm">
+          <p className="text-gray-300 font-mono text-sm font-medium">
             {'// Who I am and what drives me'}
           </p>
         </motion.div>

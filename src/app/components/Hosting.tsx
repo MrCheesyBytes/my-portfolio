@@ -1,31 +1,34 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { Cloud, Github, Lock, Zap } from 'lucide-react';
+
 
 export default function Hosting() {
   const stackInfo = [
     {
       label: 'Hosting Platform',
       value: 'Cloudflare Pages',
-      icon: '☁️',
+      icon: Cloud,
       description: 'Global CDN with edge computing'
     },
     {
       label: 'Deployment Source',
       value: 'GitHub',
-      icon: '🔗',
+      icon: Github,
       description: 'Automated CI/CD pipeline'
     },
     {
       label: 'Security',
       value: 'Cloudflare CDN & HTTPS',
-      icon: '🔒',
+      icon: Lock,
       description: 'DDoS protection & SSL/TLS encryption'
     },
     {
       label: 'Framework',
       value: 'Next.js (Static Export)',
-      icon: '⚡',
+      icon: Zap,
       description: 'React-based SSG for performance'
     }
   ];
@@ -93,7 +96,7 @@ export default function Hosting() {
                   <div className="flex items-baseline gap-2 flex-wrap">
                     <span className="text-blue-400">{item.label}:</span>
                     <span className="text-terminal-accent font-bold">{item.value}</span>
-                    <span className="text-xl">{item.icon}</span>
+                    <item.icon className="w-5 h-5 ml-1 inline-block self-center text-terminal-accent" />
                   </div>
                   <div className="text-gray-500 text-xs mt-1 pl-4">
                     # {item.description}
@@ -125,7 +128,7 @@ export default function Hosting() {
             transition={{ delay: 0.2 }}
             className="bg-terminal-bg/40 border border-terminal-accent/30 rounded-lg p-6 hover:border-terminal-accent/60 transition-colors backdrop-blur-sm"
           >
-            <div className="text-3xl mb-3">🌐</div>
+            <img src="/icons/icon_web.svg" alt="Web" className="w-8 h-8 mb-3 object-contain" />
             <h3 className="text-lg font-bold text-terminal-accent mb-2 font-mono">
               Global CDN
             </h3>
@@ -141,7 +144,7 @@ export default function Hosting() {
             transition={{ delay: 0.3 }}
             className="bg-terminal-bg/40 border border-terminal-accent/30 rounded-lg p-6 hover:border-terminal-accent/60 transition-colors backdrop-blur-sm"
           >
-            <div className="text-3xl mb-3">🚀</div>
+            <img src="/icons/icon_rocket.svg" alt="Rocket" className="w-8 h-8 mb-3 object-contain" />
             <h3 className="text-lg font-bold text-terminal-accent mb-2 font-mono">
               Instant Deploys
             </h3>
@@ -157,7 +160,7 @@ export default function Hosting() {
             transition={{ delay: 0.4 }}
             className="bg-terminal-bg/40 border border-terminal-accent/30 rounded-lg p-6 hover:border-terminal-accent/60 transition-colors backdrop-blur-sm"
           >
-            <div className="text-3xl mb-3">🛡️</div>
+            <img src="/icons/icon_shield.svg" alt="Shield" className="w-8 h-8 mb-3 object-contain" />
             <h3 className="text-lg font-bold text-terminal-accent mb-2 font-mono">
               Enterprise Security
             </h3>

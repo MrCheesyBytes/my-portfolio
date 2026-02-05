@@ -4,9 +4,24 @@ import { motion } from 'framer-motion';
 
 export default function Skills() {
   const skills = [
+    // Programming & Development (Filtered)
     { name: 'Python', status: 'Daily Use' },
     { name: 'Git & GitHub', status: 'Daily Use' },
-    { name: 'Linux/Bash', status: 'Daily Use' }
+    { name: 'Linux/Bash', status: 'Daily Use' },
+    // Security & Networking (All)
+    { name: 'Network Protocols (TCP/IP)', status: 'Learning' },
+    { name: 'Penetration Testing', status: 'Learning' },
+    { name: 'Cryptography Basics', status: 'Learning' },
+    { name: 'Wireshark', status: 'Practicing' },
+    { name: 'Nmap & Scanning Tools', status: 'Practicing' },
+    { name: 'OWASP Top 10', status: 'Learning' },
+    // Concepts & Fundamentals (All)
+    { name: 'Secure Coding Practices', status: 'Learning' },
+    { name: 'Web Security (XSS, CSRF, SQL Injection)', status: 'Learning' },
+    { name: 'Authentication & Authorization', status: 'Learning' },
+    { name: 'Ethical Hacking', status: 'Learning' },
+    { name: 'Threat Modeling', status: 'Learning' },
+    { name: 'Security Research', status: 'Learning' }
   ];
 
   return (
@@ -36,7 +51,7 @@ export default function Skills() {
               viewport={{ once: true }}
               transition={{
                 duration: 0.3,
-                delay: index * 0.1
+                delay: index * 0.05
               }}
               className="bg-terminal-bg border border-terminal-border rounded px-4 py-3 hover:border-terminal-accent transition-colors"
             >

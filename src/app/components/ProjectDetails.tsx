@@ -139,7 +139,9 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
                 transition={{ delay: 0.5 + idx * 0.05 }}
                 className="flex items-start text-gray-300 font-mono text-xs"
               >
-                <span className="text-terminal-accent mr-3 mt-0.5 text-sm">✓</span>
+                <span className="text-terminal-accent mr-3 mt-0.5 w-4 h-4 inline-block">
+                  <img src="/icons/icon_check.svg" alt="Check" className="w-full h-full object-contain" />
+                </span>
                 <span>{item}</span>
               </motion.div>
             ))}

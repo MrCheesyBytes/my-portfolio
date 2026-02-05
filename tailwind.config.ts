@@ -16,7 +16,7 @@ const config: Config = {
         'terminal-accent': '#A1A1AA',
       },
       fontFamily: {
-        mono: ['Courier New', 'Monaco', 'Consolas', 'monospace'],
+        mono: ['JetBrains Mono', 'Courier New', 'Monaco', 'Consolas', 'monospace'],
       },
       animation: {
         'glitch': 'glitch 1s infinite',

@@ -1,30 +1,32 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { Mail, Github, Linkedin } from 'lucide-react';
 
 export default function Contact() {
   const contacts = [
     {
       label: 'Email',
-      value: 'your.email@example.com',
-      href: 'mailto:your.email@example.com',
-      icon: '📧',
+      value: 'danindunavoda@gmail.com',
+      href: 'mailto:danindunavoda@gmail.com',
+      icon: Mail,
       command: 'echo',
       color: 'text-blue-400'
     },
     {
       label: 'GitHub',
-      value: 'github.com/yourusername',
-      href: 'https://github.com/yourusername',
-      icon: '🐙',
+      value: 'github.com/MrCheesyBytes',
+      href: 'https://github.com/MrCheesyBytes',
+      icon: Github,
       command: 'git clone',
       color: 'text-purple-400'
     },
     {
       label: 'LinkedIn',
-      value: 'linkedin.com/in/yourprofile',
-      href: 'https://linkedin.com/in/yourprofile',
-      icon: '💼',
+      value: 'linkedin.com/in/danindu-navoda',
+      href: 'https://www.linkedin.com/in/danindu-navoda/',
+      icon: Linkedin,
       command: 'curl',
       color: 'text-cyan-400'
     }
@@ -83,7 +85,7 @@ export default function Contact() {
                   <span className="text-gray-600">$</span>
                   <span className="text-terminal-accent">{contact.command}</span>
                   <span className="text-gray-500">{contact.label.toLowerCase()}</span>
-                  <span className="text-2xl ml-2">{contact.icon}</span>
+                  <contact.icon className="w-5 h-5 ml-2 text-terminal-accent" />
                 </div>
 
                 {/* Contact link */}
@@ -158,7 +160,7 @@ export default function Contact() {
             <span className="text-terminal-accent">PGP Key Available</span> · Secure Communication Preferred
           </p>
           <p className="text-gray-700 font-mono text-xs">
-            © 2026 Your Name · Built with ❤️ and ☕
+            © 2026 Danindu Bataduwage · Built with <img src="/icons/icon_heart.svg" alt="Love" className="inline w-4 h-4 mx-1 align-text-bottom" /> and <img src="/icons/icon_coffee.svg" alt="Coffee" className="inline w-4 h-4 mx-1 align-text-bottom" />
           </p>
         </motion.div>
       </div>

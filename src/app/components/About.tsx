@@ -1,26 +1,28 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { GraduationCap, Lock, Zap, Search } from 'lucide-react';
+
 
 export default function About() {
   const highlights = [
     {
-      icon: '🎓',
+      icon: GraduationCap,
       title: 'Student Mindset',
       description: 'Constantly learning, experimenting, and pushing boundaries in cybersecurity and software development.'
     },
     {
-      icon: '🔒',
+      icon: Lock,
       title: 'Security First',
       description: 'Building with security considerations from the ground up. Every line of code is an opportunity to do it right.'
     },
     {
-      icon: '⚡',
+      icon: Zap,
       title: 'Ethical Builder',
       description: 'Committed to responsible disclosure, ethical practices, and using technical skills for positive impact.'
     },
     {
-      icon: '🔍',
+      icon: Search,
       title: 'Curious Mind',
       description: 'Always asking "how does this work?" and "what could go wrong?" Driven by curiosity and problem-solving.'
     }
@@ -111,13 +113,14 @@ export default function About() {
                 className="bg-terminal-bg/40 border border-terminal-accent/30 rounded-lg p-5 hover:border-terminal-accent/60 transition-colors backdrop-blur-sm group"
               >
                 <div className="flex items-start gap-4">
-                  <motion.span
-                    className="text-3xl"
+                  <motion.div
                     whileHover={{ scale: 1.2, rotate: 5 }}
                     transition={{ type: 'spring', stiffness: 300 }}
+                    className="w-8 h-8 flex items-center justify-center text-terminal-accent"
                   >
-                    {item.icon}
-                  </motion.span>
+                    {/* Render the icon component directly */}
+                    <item.icon size={32} strokeWidth={2} />
+                  </motion.div>
                   <div>
                     <h3 className="text-lg font-bold text-terminal-accent mb-2 font-mono group-hover:text-terminal-text-primary transition-colors">
                       {item.title}

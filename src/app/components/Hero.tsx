@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 export default function Hero() {
@@ -152,7 +153,7 @@ export default function Hero() {
           >
             <div className="flex flex-col items-center gap-2">
               <span>scroll</span>
-              <span className="text-lg">↓</span>
+              <img src="/icons/icon_arrow_down.svg" alt="Scroll Down" className="w-6 h-6" />
             </div>
           </motion.div>
         </motion.div>

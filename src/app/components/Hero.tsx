@@ -80,8 +80,8 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-5xl md:text-7xl font-bold mb-6 font-mono text-terminal-text-primary"
         >
-          <span className="text-terminal-text-primary">Your</span>
-          <span className="text-terminal-accent"> Name</span>
+          <span className="text-terminal-text-primary">Danindu</span>
+          <span className="text-terminal-accent">Bataduwage</span>
         </motion.h1>
 
         {/* Role with typing animation */}

@@ -135,4 +135,7 @@ MIT License - feel free to use this for your own portfolio!
 
 Built with passion for cybersecurity and clean code. Hosted on Cloudflare Pages.
 
-[MSI Prestige 14 AI Evo 14" Laptop - Intel® Core™ Ultra 7, 512 GB SSD, Grey](https://www.currys.co.uk/products/msi-prestige-14-ai-evo-14-laptop-intel-core-ultra-7-512-gb-ssd-grey-10266448.html)
+
+> ### [Cloudflare Pages](https://pages.cloudflare.com/)
+> [![Deployment Status](https://img.shields.io/badge/Cloudflare_Pages-Active-orange?style=flat-square&logo=cloudflare)](https://pages.cloudflare.com/)
+> Cloudflare Pages is a JAMstack platform for frontend developers to collaborate and deploy websites.

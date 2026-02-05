@@ -135,7 +135,7 @@ MIT License - feel free to use this for your own portfolio!
 
 Built with passion for cybersecurity and clean code. Built using Google Antigravity, Hosted on Cloudflare Pages.
 
-> **Frontend Orchestration:** Built using **[Google Antigravity](https://antigravity.google/)**
+> Built using **[Google Antigravity](https://antigravity.google/)**
 
 
 > ### [Cloudflare Pages](https://pages.cloudflare.com/)

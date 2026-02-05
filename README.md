@@ -133,4 +133,12 @@ MIT License - feel free to use this for your own portfolio!
 
 ## 🙏 Credits
 
-Built with passion for cybersecurity and clean code. Hosted on Cloudflare Pages.
+Built with passion for cybersecurity and clean code. Built using Google Antigravity, Hosted on Cloudflare Pages.
+
+> Built using **[Google Antigravity](https://antigravity.google/)**
+
+
+> ### [Cloudflare Pages](https://pages.cloudflare.com/)
+> [![Deployment Status](https://img.shields.io/badge/Cloudflare_Pages-Active-orange?style=flat-square&logo=cloudflare)](https://pages.cloudflare.com/)
+
+

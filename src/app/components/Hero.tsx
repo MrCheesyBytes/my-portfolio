@@ -81,7 +81,7 @@ export default function Hero() {
           className="text-5xl md:text-7xl font-bold mb-6 font-mono text-terminal-text-primary"
         >
           <span className="text-terminal-text-primary">Danindu</span>
-          <span className="text-terminal-accent">Bataduwage</span>
+          <span className="text-terminal-accent"> Bataduwage</span>
         </motion.h1>
 
         {/* Role with typing animation */}

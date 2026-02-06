@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from 'react';
 
 export default function Hero() {
   const [text, setText] = useState('');
+  const [isMounted, setIsMounted] = useState(false); // Track mounting
   const fullText = 'cybersecurity enthusiast';
   const containerRef = useRef(null);
 
@@ -14,15 +15,14 @@ export default function Hero() {
     offset: ["start start", "end start"]
   });
 
-  // Adjusted ranges to make the fade/scale happen faster so it doesn't leave a gap
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
   const yContent = useTransform(scrollYProgress, [0, 0.5], [0, -100]);
   const blur = useTransform(scrollYProgress, [0, 0.4], [0, 8]);
-  
   const rotateX = useTransform(scrollYProgress, [0, 1], [0, 45]);
 
   useEffect(() => {
+    setIsMounted(true); // Signal that we are now on the client
     let currentIndex = 0;
     const interval = setInterval(() => {
       if (currentIndex <= fullText.length) {
@@ -38,7 +38,6 @@ export default function Hero() {
   return (
     <section 
       ref={containerRef} 
-      // Changed from 150vh to 120vh to reduce dead scroll space
       className="relative min-h-[120vh] flex flex-col items-center justify-start px-6 overflow-visible"
     >
       {/* --- VISUAL DIVIDER: CYBER GRID FLOOR --- */}
@@ -51,9 +50,9 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Floating particles */}
+      {/* Floating particles - Only render if isMounted is true */}
       <div className="absolute inset-0 pointer-events-none">
-        {[...Array(12)].map((_, i) => (
+        {isMounted && [...Array(12)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-terminal-accent/40 rounded-full"
@@ -83,7 +82,6 @@ export default function Hero() {
           y: yContent,
           filter: `blur(${blur}px)` 
         }}
-        // Adjusted padding-top from 25vh to 20vh to move content up slightly
         className="sticky top-0 z-10 max-w-4xl mx-auto text-center pt-[20vh] pb-10"
       >
         <motion.div
@@ -161,10 +159,8 @@ export default function Hero() {
           </motion.a>
         </motion.div>
 
-        {/* --- ADJUSTED SCROLL INDICATOR --- */}
         <motion.div
           style={{ opacity }}
-          // Reduced top margin from 24 to 12
           className="mt-12 flex flex-col items-center gap-4"
         >
           <motion.div
@@ -178,7 +174,6 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Enhanced Bottom Fade - Shortened height to prevent overlap */}
       <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-20" />
     </section>
   );

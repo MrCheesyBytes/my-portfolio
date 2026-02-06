@@ -9,153 +9,146 @@ interface ProjectDetailsProps {
 }
 
 export default function ProjectDetails({ project }: ProjectDetailsProps) {
+  // Animation variants for staggered children
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, height: 0 }}
       animate={{ opacity: 1, height: 'auto' }}
       exit={{ opacity: 0, height: 0 }}
-      transition={{ duration: 0.4, ease: 'easeInOut' }}
+      transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
       className="overflow-hidden"
     >
-      <div className="mt-4 bg-terminal-bg/60 border border-terminal-accent/20 rounded-lg p-8 backdrop-blur-sm">
-        {/* Project Images */}
-        {project.images && project.images.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="mb-8"
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {project.images.map((image, idx) => (
-                <div
-                  key={idx}
-                  className="relative w-full aspect-video bg-terminal-bg/40 rounded border border-terminal-accent/30 overflow-hidden group"
-                >
-                  <Image
-                    src={image}
-                    alt={`${project.title} screenshot ${idx + 1}`}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                  {/* Glitch overlay on hover */}
-                  <div className="absolute inset-0 bg-terminal-accent/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+      <div className="mt-4 bg-black/60 border-x border-b border-terminal-accent/20 rounded-b-lg p-8 backdrop-blur-xl shadow-2xl relative">
+        {/* Decorative Corner accents */}
+        <div className="absolute top-0 left-0 w-2 h-2 border-l border-t border-terminal-accent/40" />
+        <div className="absolute top-0 right-0 w-2 h-2 border-r border-t border-terminal-accent/40" />
+
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {/* Project Images */}
+          {project.images && project.images.length > 0 && (
+            <motion.div variants={itemVariants} className="mb-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {project.images.map((image, idx) => (
+                  <div
+                    key={idx}
+                    className="relative w-full aspect-video bg-terminal-bg/40 rounded-lg border border-white/5 overflow-hidden group shadow-inner"
+                  >
+                    <Image
+                      src={image}
+                      alt={`${project.title} screenshot ${idx + 1}`}
+                      fill
+                      className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-700 ease-in-out"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                    {/* Scanline overlay for images */}
+                    <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] z-10 pointer-events-none bg-[length:100%_2px,3px_100%]" />
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div>
+              {/* Description Section */}
+              <motion.div variants={itemVariants} className="mb-8">
+                <h4 className="text-xs uppercase tracking-[0.2em] font-bold text-terminal-accent/70 mb-4 font-mono">
+                  // 01. Overview
+                </h4>
+                <p className="text-gray-300 leading-relaxed font-mono text-sm border-l-2 border-terminal-accent/10 pl-4">
+                  {project.description}
+                </p>
+              </motion.div>
+
+              {/* What I Learned Section */}
+              <motion.div variants={itemVariants} className="mb-8">
+                <h4 className="text-xs uppercase tracking-[0.2em] font-bold text-terminal-accent/70 mb-4 font-mono">
+                  // 02. Technical Growth
+                </h4>
+                <ul className="space-y-3">
+                  {project.learned.map((item, idx) => (
+                    <li
+                      key={idx}
+                      className="flex items-start text-gray-400 font-mono text-xs hover:text-terminal-accent transition-colors cursor-default"
+                    >
+                      <span className="text-terminal-accent mr-3 opacity-50">#</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            </div>
+
+            <div>
+              {/* Tools & Technologies Section */}
+              <motion.div variants={itemVariants} className="mb-8">
+                <h4 className="text-xs uppercase tracking-[0.2em] font-bold text-terminal-accent/70 mb-4 font-mono">
+                  // 03. Stack
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {project.tools.map((tool) => (
+                    <span
+                      key={tool}
+                      className="px-3 py-1 bg-white/5 text-gray-400 rounded-sm border border-white/10 font-mono text-[10px] hover:border-terminal-accent/50 hover:text-white transition-all"
+                    >
+                      {tool}
+                    </span>
+                  ))}
                 </div>
-              ))}
+              </motion.div>
+
+              {/* Security Considerations Section */}
+              <motion.div variants={itemVariants}>
+                <h4 className="text-xs uppercase tracking-[0.2em] font-bold text-terminal-accent/70 mb-4 font-mono">
+                  // 04. Security Audit
+                </h4>
+                <div className="bg-black/40 border border-white/5 rounded-sm p-5 space-y-3 shadow-inner">
+                  {project.security.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-start text-gray-400 font-mono text-[11px]"
+                    >
+                      <span className="text-terminal-accent mr-3 text-xs">✓</span>
+                      <span className="leading-tight">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Terminal-style footer */}
+          <motion.div
+            variants={itemVariants}
+            className="mt-12 pt-4 border-t border-white/5 text-gray-600 font-mono text-[10px] flex justify-between items-center"
+          >
+            <div>
+              <span className="text-terminal-accent">$</span> task --status complete
+            </div>
+            <div className="opacity-50">
+              PRJ_{project.id.toUpperCase()}
             </div>
           </motion.div>
-        )}
-
-        {/* Description Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="mb-8"
-        >
-          <h4 className="text-xl font-bold text-terminal-accent mb-3 font-mono flex items-center">
-            <span className="text-terminal-accent mr-2">[</span>
-            Overview
-            <span className="text-terminal-accent ml-2">]</span>
-          </h4>
-          <p className="text-gray-300 leading-relaxed font-mono text-sm">
-            {project.description}
-          </p>
-        </motion.div>
-
-        {/* What I Learned Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="mb-8"
-        >
-          <h4 className="text-xl font-bold text-terminal-accent mb-3 font-mono flex items-center">
-            <span className="text-terminal-accent mr-2">[</span>
-            What I Learned
-            <span className="text-terminal-accent ml-2">]</span>
-          </h4>
-          <ul className="space-y-2">
-            {project.learned.map((item, idx) => (
-              <motion.li
-                key={idx}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3 + idx * 0.05 }}
-                className="flex items-start text-gray-300 font-mono text-sm"
-              >
-                <span className="text-terminal-accent mr-3 mt-0.5">&gt;</span>
-                <span>{item}</span>
-              </motion.li>
-            ))}
-          </ul>
-        </motion.div>
-
-        {/* Tools & Technologies Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="mb-8"
-        >
-          <h4 className="text-xl font-bold text-terminal-accent mb-3 font-mono flex items-center">
-            <span className="text-terminal-accent mr-2">[</span>
-            Tools & Technologies
-            <span className="text-terminal-accent ml-2">]</span>
-          </h4>
-          <div className="flex flex-wrap gap-2">
-            {project.tools.map((tool, idx) => (
-              <motion.span
-                key={tool}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.4 + idx * 0.05 }}
-                className="px-3 py-1.5 bg-terminal-accent/10 text-terminal-accent rounded border border-terminal-accent/40 font-mono text-sm hover:bg-terminal-accent/20 transition-colors"
-              >
-                {tool}
-              </motion.span>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Security Considerations Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-        >
-          <h4 className="text-xl font-bold text-terminal-accent mb-3 font-mono flex items-center">
-            <span className="text-terminal-accent mr-2">[</span>
-            Security Considerations
-            <span className="text-terminal-accent ml-2">]</span>
-          </h4>
-          <div className="bg-terminal-bg/40 border border-terminal-accent/20 rounded p-4 space-y-2">
-            {project.security.map((item, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5 + idx * 0.05 }}
-                className="flex items-start text-gray-300 font-mono text-xs"
-              >
-                <span className="text-terminal-accent mr-3 mt-0.5 w-4 h-4 inline-block">
-                  <img src="/icons/icon_check.svg" alt="Check" className="w-full h-full object-contain" />
-                </span>
-                <span>{item}</span>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Terminal-style footer */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="mt-6 pt-4 border-t border-terminal-accent/20 text-gray-600 font-mono text-xs"
-        >
-          <span className="text-terminal-accent">$</span> Click outside to collapse
         </motion.div>
       </div>
     </motion.div>

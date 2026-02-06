@@ -1,14 +1,27 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useEffect, useState, useRef } from 'react';
 
 export default function Hero() {
   const [text, setText] = useState('');
   const fullText = 'cybersecurity enthusiast';
+  const containerRef = useRef(null);
 
-  // Typing animation effect
+  // --- APPLE-STYLE SCROLL LOGIC ---
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  // Adjusted ranges to make the fade/scale happen faster so it doesn't leave a gap
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
+  const yContent = useTransform(scrollYProgress, [0, 0.5], [0, -100]);
+  const blur = useTransform(scrollYProgress, [0, 0.4], [0, 8]);
+  
+  const rotateX = useTransform(scrollYProgress, [0, 1], [0, 45]);
+
   useEffect(() => {
     let currentIndex = 0;
     const interval = setInterval(() => {
@@ -19,47 +32,60 @@ export default function Hero() {
         clearInterval(interval);
       }
     }, 80);
-
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden bg-terminal-bg">
-      {/* Animated background grid */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'linear-gradient(#1F2937 1px, transparent 1px), linear-gradient(90deg, #1F2937 1px, transparent 1px)',
-          backgroundSize: '50px 50px',
-          opacity: 0.1
-        }} />
+    <section 
+      ref={containerRef} 
+      // Changed from 150vh to 120vh to reduce dead scroll space
+      className="relative min-h-[120vh] flex flex-col items-center justify-start px-6 overflow-visible"
+    >
+      {/* --- VISUAL DIVIDER: CYBER GRID FLOOR --- */}
+      <div className="absolute inset-0 perspective-[1000px] pointer-events-none overflow-hidden">
+        <motion.div 
+          style={{ rotateX, opacity }}
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[200%] h-[50vh] origin-bottom"
+        >
+          <div className="w-full h-full bg-[linear-gradient(to_right,#00ff4112_1px,transparent_1px),linear-gradient(to_bottom,#00ff4112_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_100%,#000_70%,transparent_100%)]" />
+        </motion.div>
       </div>
 
       {/* Floating particles */}
-      {[...Array(5)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-1 h-1 bg-terminal-accent/50 rounded-full"
-          animate={{
-            y: [-20, -100],
-            x: [0, Math.random() * 100 - 50],
-            opacity: [0, 1, 0]
-          }}
-          transition={{
-            duration: 3 + Math.random() * 2,
-            repeat: Infinity,
-            delay: i * 0.5,
-            ease: 'easeOut'
-          }}
-          style={{
-            left: `${20 + i * 15}%`,
-            bottom: '10%'
-          }}
-        />
-      ))}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(12)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-terminal-accent/40 rounded-full"
+            animate={{
+              y: [0, -400],
+              x: [0, (i % 2 === 0 ? 50 : -50)],
+              opacity: [0, 1, 0]
+            }}
+            transition={{
+              duration: 5 + Math.random() * 5,
+              repeat: Infinity,
+              delay: i * 0.8,
+            }}
+            style={{
+              left: `${Math.random() * 100}%`,
+              bottom: '10%'
+            }}
+          />
+        ))}
+      </div>
 
-      {/* Main content */}
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
-        {/* Terminal prompt */}
+      {/* --- MAIN CONTENT --- */}
+      <motion.div 
+        style={{ 
+          opacity, 
+          scale, 
+          y: yContent,
+          filter: `blur(${blur}px)` 
+        }}
+        // Adjusted padding-top from 25vh to 20vh to move content up slightly
+        className="sticky top-0 z-10 max-w-4xl mx-auto text-center pt-[20vh] pb-10"
+      >
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -73,18 +99,16 @@ export default function Hero() {
           <span className="text-terminal-accent">whoami</span>
         </motion.div>
 
-        {/* Name */}
         <motion.h1
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-5xl md:text-7xl font-bold mb-6 font-mono text-terminal-text-primary"
+          className="text-5xl md:text-8xl font-bold mb-6 font-mono text-terminal-text-primary tracking-tighter"
         >
           <span className="text-terminal-text-primary">Danindu</span>
           <span className="text-terminal-accent"> Bataduwage</span>
         </motion.h1>
 
-        {/* Role with typing animation */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -102,17 +126,15 @@ export default function Hero() {
           </motion.span>
         </motion.div>
 
-        {/* Tagline */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}
-          className="text-terminal-text-secondary font-mono text-sm md:text-base mb-12 max-w-2xl mx-auto"
+          className="text-terminal-text-secondary font-mono text-sm md:text-base mb-12 max-w-2xl mx-auto leading-relaxed"
         >
           {'// Student. Learner. Builder. Exploring the intersection of code and security.'}
         </motion.p>
 
-        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -121,7 +143,7 @@ export default function Hero() {
         >
           <motion.a
             href="#projects"
-            className="px-6 py-3 bg-terminal-accent/10 border border-terminal-accent text-terminal-accent rounded font-mono hover:bg-terminal-accent/20 transition-colors group"
+            className="px-8 py-4 bg-terminal-accent/10 border border-terminal-accent text-terminal-accent rounded font-mono hover:bg-terminal-accent/20 transition-all group"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -131,7 +153,7 @@ export default function Hero() {
 
           <motion.a
             href="#contact"
-            className="px-6 py-3 border border-terminal-accent/30 text-terminal-text-secondary rounded font-mono hover:border-terminal-accent/60 hover:text-terminal-accent transition-colors"
+            className="px-8 py-4 border border-terminal-accent/30 text-terminal-text-secondary rounded font-mono hover:border-terminal-accent/60 hover:text-terminal-accent transition-all"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -139,36 +161,25 @@ export default function Hero() {
           </motion.a>
         </motion.div>
 
-        {/* Scroll indicator */}
+        {/* --- ADJUSTED SCROLL INDICATOR --- */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 2 }}
-          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 pb-4"
+          style={{ opacity }}
+          // Reduced top margin from 24 to 12
+          className="mt-12 flex flex-col items-center gap-4"
         >
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
-            className="text-terminal-accent/50 font-mono text-xs"
+            className="text-terminal-accent/50 font-mono text-xs uppercase tracking-[0.3em]"
           >
-            <div className="flex flex-col items-center gap-2">
-              <span>scroll</span>
-              <img src="/icons/icon_arrow_down.svg" alt="Scroll Down" className="w-6 h-6" />
-            </div>
+            Scroll to Decrypt
+            <div className="w-[1px] h-16 bg-terminal-accent mx-auto mt-4 shadow-[0_0_8px_#00ff41]" />
           </motion.div>
         </motion.div>
-      </div>
+      </motion.div>
 
-      {/* Scanline effect */}
-      <motion.div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: 'linear-gradient(transparent 50%, rgba(161, 161, 170, 0.02) 50%)',
-          backgroundSize: '100% 4px'
-        }}
-        animate={{ y: [0, 8] }}
-        transition={{ duration: 0.1, repeat: Infinity, ease: 'linear' }}
-      />
+      {/* Enhanced Bottom Fade - Shortened height to prevent overlap */}
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-20" />
     </section>
   );
 }

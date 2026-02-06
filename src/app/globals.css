@@ -4,175 +4,117 @@
 
 @layer base {
   :root {
-    --bg-primary: #0B0E11;
-    --text-primary: #E6EDF3;
-    --text-secondary: #9BA3AF;
-    --border-color: #1F2937;
-    --accent-color: #A1A1AA;
+    /* Updated to match your terminal theme */
+    --terminal-bg: #0B0E11;
+    --terminal-text-primary: #E6EDF3;
+    --terminal-text-secondary: #9BA3AF;
+    --terminal-accent: #A1A1AA; /* Subtle gray/silver accent */
+    --terminal-border: #1F2937;
   }
 
-  body {
-    @apply bg-terminal-bg text-terminal-text-primary;
+  html, body {
+    background-color: var(--terminal-bg);
+    color: var(--terminal-text-primary);
     font-family: 'JetBrains Mono', 'Courier New', 'Monaco', 'Consolas', monospace;
     line-height: 1.6;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: 'JetBrains Mono', 'Courier New', 'Monaco', 'Consolas', monospace;
-  }
-
-  /* Smooth scrolling */
-  html {
     scroll-behavior: smooth;
+    /* CRITICAL: Hide default cursor site-wide for your custom cursor */
+    cursor: none !important;
   }
 
-  /* Custom scrollbar */
+  /* Ensure interactive elements also hide the system cursor */
+  a, button, input, textarea, [role="button"] {
+    cursor: none !important;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Custom terminal scrollbar */
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #0a0a0a;
+    background: var(--terminal-bg);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #1F2937;
-    border-radius: 5px;
+    background: var(--terminal-border);
+    border-radius: 4px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #A1A1AA;
+    background: var(--terminal-accent);
   }
 
-  /* Selection color */
+  /* Terminal text selection */
   ::selection {
-    background: #A1A1AA;
-    color: #0B0E11;
-  }
-
-  ::-moz-selection {
-    background: #A1A1AA;
-    color: #0B0E11;
+    background: var(--terminal-accent);
+    color: var(--terminal-bg);
   }
 }
 
 @layer components {
-
-  /* Glitch effect utility */
-  .glitch {
-    position: relative;
-    animation: glitch 1s infinite;
-  }
-
-  @keyframes glitch {
-
-    0%,
-    100% {
-      transform: translate(0);
-    }
-
-    20% {
-      transform: translate(-2px, 2px);
-    }
-
-    40% {
-      transform: translate(-2px, -2px);
-    }
-
-    60% {
-      transform: translate(2px, 2px);
-    }
-
-    80% {
-      transform: translate(2px, -2px);
-    }
-  }
-
-  /* Scanline effect */
-  .scanline {
-    background: linear-gradient(transparent 50%,
-        rgba(161, 161, 170, 0.05) 50%);
+  /* Scanline effect logic */
+  .animate-scanline {
+    background: linear-gradient(
+      transparent 50%,
+      rgba(161, 161, 170, 0.05) 50%
+    );
     background-size: 100% 4px;
     animation: scanline 8s linear infinite;
   }
 
   @keyframes scanline {
-    0% {
-      background-position: 0 0;
-    }
-
-    100% {
-      background-position: 0 100%;
-    }
+    from { background-position: 0 0; }
+    to { background-position: 0 100%; }
   }
 
-  /* CRT flicker */
+  /* Terminal cursor blinking */
+  .animate-cursor-blink {
+    animation: cursor-blink 1s step-end infinite;
+  }
+
+  @keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* Subtle CRT flicker */
   .crt-flicker {
     animation: flicker 0.15s infinite;
   }
 
   @keyframes flicker {
-    0% {
-      opacity: 0.98;
-    }
-
-    50% {
-      opacity: 1;
-    }
-
-    100% {
-      opacity: 0.98;
-    }
+    0% { opacity: 0.99; }
+    50% { opacity: 1; }
+    100% { opacity: 0.99; }
   }
 
-  /* Neon glow - Removed or updated to subtle terminal glow if needed, for now removing strict green */
-  .neon-glow {
-    text-shadow: 0 0 5px rgba(161, 161, 170, 0.5);
+  /* Glitch effect for headers */
+  .glitch:hover {
+    animation: glitch 0.3s cubic-bezier(.25,.46,.45,.94) both infinite;
   }
 
-  /* Terminal cursor blink */
-  @keyframes cursor-blink {
-
-    0%,
-    50% {
-      opacity: 1;
-    }
-
-    51%,
-    100% {
-      opacity: 0;
-    }
-  }
-
-  .cursor-blink {
-    animation: cursor-blink 1s infinite;
+  @keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
   }
 }
 
 @layer utilities {
-
-  /* Custom utilities */
   .text-balance {
     text-wrap: balance;
   }
-
-  /* Responsive font sizes */
-  .text-responsive {
-    font-size: clamp(1rem, 2vw, 1.5rem);
-  }
-
-  /* Hide scrollbar but keep functionality */
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  
+  /* Utility to hide cursor specifically if needed */
+  .no-cursor {
+    cursor: none !important;
   }
 }

@@ -20,7 +20,7 @@ const config: Config = {
       },
       animation: {
         'glitch': 'glitch 1s infinite',
-        'scanline': 'scanline 8s linear infinite',
+        'scanline': 'scanline 0.2s linear infinite', // Faster for the CRT line effect
         'flicker': 'flicker 0.15s infinite',
         'cursor-blink': 'cursor-blink 1s infinite',
       },
@@ -33,8 +33,8 @@ const config: Config = {
           '80%': { transform: 'translate(2px, -2px)' },
         },
         scanline: {
-          '0%': { backgroundPosition: '0 0' },
-          '100%': { backgroundPosition: '0 100%' },
+          '0%': { transform: 'translateY(0)' },
+          '100%': { transform: 'translateY(4px)' }, // Moves the gradient pattern
         },
         flicker: {
           '0%': { opacity: '0.98' },

@@ -125,17 +125,17 @@ export default function About() {
                   <div className="space-y-1 mb-8">
                     <p className="text-terminal-accent">const <span className="text-blue-400">me</span> = {'{'}</p>
                     <p className="pl-4"><span className="text-blue-400">status</span>: <span className="text-yellow-400">&quot;Cybersecurity Student&quot;</span>,</p>
-                    <p className="pl-4"><span className="text-blue-400">focus</span>: [<span className="text-yellow-400">&quot;Security&quot;</span>, <span className="text-yellow-400">&quot;Code&quot;</span>],</p>
-                    <p className="pl-4"><span className="text-blue-400">mission</span>: <span className="text-yellow-400">&quot;Build secure software&quot;</span></p>
+                    <p className="pl-4"><span className="text-blue-400">focus</span>: [<span className="text-yellow-400">&quot;Cyber security&quot;</span>, <span className="text-yellow-400">&quot;Penetration Testing&quot;</span>, <span className="text-yellow-400">&quot;Offensive Security&quot;</span>],</p>
+                    <p className="pl-4"><span className="text-blue-400">mission</span>: <span className="text-yellow-400">&quot;Safeguard the Digital World&quot;</span></p>
                     <p className="">{'};'}</p>
                   </div>
 
                   <div className="space-y-4 text-gray-400 border-t border-white/5 pt-6">
                     <p>
-                      I&apos;m a cybersecurity student passionate about understanding how systems work—and how they break. 
+                      I am a Cybersecurity and networking enthusiast dedicated to protecting digital assets and navigating the complexities of cyberspace. 
                     </p>
                     <p>
-                      Every project I build is an opportunity to learn something new about security and architecture.
+                      Passionate about leveraging technology to safeguard information and empower individuals and organizations in an ever-evolving digital landscape.
                     </p>
                   </div>
                 </div>

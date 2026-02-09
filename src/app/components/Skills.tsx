@@ -37,10 +37,12 @@ export default function Skills() {
     <section 
       id="skills" 
       ref={containerRef}
-      className="min-h-screen py-32 px-6 relative bg-black overflow-hidden"
+      // CHANGED: overflow-visible prevents the "page breaker" line at the top
+      className="min-h-screen py-32 px-6 relative bg-black overflow-visible"
     >
       {/* --- ANIMATED BACKGROUND LAYER --- */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
+      {/* CHANGED: Removed overflow-hidden here to allow glow to bleed into About section */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
         {/* Roaming "Energy" Glow Ball */}
         <motion.div
           animate={{
@@ -48,7 +50,7 @@ export default function Skills() {
             y: ['-25%', '25%', '-25%'],
           }}
           transition={{
-            duration: 15, // Slightly faster for more visible movement
+            duration: 15,
             repeat: Infinity,
             ease: "easeInOut"
           }}

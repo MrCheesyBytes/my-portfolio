@@ -130,7 +130,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 1 }}
           className="text-terminal-text-secondary font-mono text-sm md:text-base mb-12 max-w-2xl mx-auto leading-relaxed"
         >
-          {'// Student. Learner. Builder. Exploring the intersection of code and security.'}
+          {'Driven Cybersecurity Student at the University of South Wales | Committed to Safeguarding the Digital World'}
         </motion.p>
 
         <motion.div

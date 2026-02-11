@@ -39,7 +39,7 @@ export default function Contact() {
       value: 'linkedin.com/in/danindu-navoda',
       href: 'https://www.linkedin.com/in/danindu-navoda/',
       icon: Linkedin,
-      command: 'finger danindu --secure',
+      command: 'linkedin-cli --profile danindu-navoda',
       color: 'text-cyan-400'
     },
 

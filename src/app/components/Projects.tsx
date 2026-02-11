@@ -22,7 +22,7 @@ const projects: Project[] = [
     id: "pfsense-secure-network",
     title: "pfSense Secure Network Infrastructure",
     tagline: "Defense-in-depth segmented network architecture",
-    link: "https://github.com/your-username/pfsense-project", 
+    link: "https://www.linkedin.com/posts/danindu-navoda_cybersecurity-securesystems-pfsense-ugcPost-7427156766221582336-dYqT", 
     description:
       "Designed and implemented a segmented small business network using pfSense as the perimeter firewall and router. The infrastructure was deployed in a virtualised VMware Workstation environment and integrated Active Directory, DNS, DHCP, Splunk log monitoring, and internal application services. The project focused on defence-in-depth, secure routing between networks, and enterprise-style access control across multiple subnets.",
     learned: [

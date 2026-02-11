@@ -2,7 +2,8 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { Mail, Github, Linkedin, Terminal, ChevronRight, Copy, Check, ShieldCheck, Wifi } from 'lucide-react';
+import { Mail, Github, Linkedin, Terminal, ChevronRight, Copy, Check, ShieldCheck, Wifi, Link } from 'lucide-react';
+import { url } from 'inspector';
 
 export default function Contact() {
   const [mounted, setMounted] = useState(false);
@@ -40,6 +41,16 @@ export default function Contact() {
       icon: Linkedin,
       command: 'finger danindu --secure',
       color: 'text-cyan-400'
+    },
+
+    {
+      id: 'url',
+      label: 'Linktree',
+      value: 'linktr.ee/danindu_B',
+      href: 'https://linktr.ee/danindu_B',
+      icon: Link,
+      command: 'curl -s https://linktr.ee/danindu_B',
+      color: 'text-green-400'      
     }
   ];
 

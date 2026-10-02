@@ -138,19 +138,10 @@ Your site benefits from Cloudflare's global CDN:
 
 ## Security Headers (Optional)
 
-Add security headers in Cloudflare Pages:
-
-1. Create `public/_headers` file:
-```
-/*
-  X-Frame-Options: DENY
-  X-Content-Type-Options: nosniff
-  Referrer-Policy: no-referrer
-  Permissions-Policy: geolocation=(), microphone=(), camera=()
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:;
-```
-
-2. Redeploy your site
+Security headers (CSP, HSTS, clickjacking and MIME-sniffing protection) are already
+configured in `public/_headers`, which Cloudflare Pages applies automatically on deploy.
+The CSP allows Google Fonts and the grain overlay host used by the design; if you add
+another external resource, add its origin to the matching directive in that file.
 
 ## Rollback
 

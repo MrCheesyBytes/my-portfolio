@@ -3,7 +3,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Mail, Github, Linkedin, Terminal, ChevronRight, Copy, Check, ShieldCheck, Wifi, Link } from 'lucide-react';
-import { url } from 'inspector';
 
 export default function Contact() {
   const [mounted, setMounted] = useState(false);
@@ -55,9 +54,14 @@ export default function Contact() {
   ];
 
   const copyToClipboard = (text: string, id: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedId(id);
-    setTimeout(() => setCopiedId(null), 2000);
+    // Clipboard API is only available in secure contexts and can be denied by the browser
+    navigator.clipboard?.writeText(text).then(
+      () => {
+        setCopiedId(id);
+        setTimeout(() => setCopiedId(null), 2000);
+      },
+      () => {}
+    );
   };
 
   const { scrollYProgress } = useScroll({
